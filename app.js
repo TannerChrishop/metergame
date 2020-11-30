@@ -11,7 +11,7 @@ var canvas, canvasContext;
 canvas = document.getElementById('gameCanvas');
 canvasContext = canvas.getContext('2d');
 
-var zurgSize = 1, frame1x = 0, frame1y = 0, holdingDown = false, holdingUp = false, holdingLeft = false, holdingRight = false,
+var zurgSize = 1.5, frame1x = 0, frame1y = 0, holdingDown = false, holdingUp = false, holdingLeft = false, holdingRight = false,
   backgroundImage = new Image(), zurg = new Image(), zurgx = 10, zurgy = 150, zurgDirection = 'down';
 
 backgroundImage.src = 'sprites/background.png'; zurg.src = 'sprites/zurgdudemaster.png';
@@ -24,6 +24,10 @@ window.onload = function () {
 
 function doStuff() {
   canvasContext.drawImage(backgroundImage, 0, 0);
+
+  canvasContext.imageSmoothingEnabled = false;
+
+
   canvasContext.drawImage(zurg, frame1x, frame1y, 32, 64, (zurgx - (16 * (zurgSize - 1))), (zurgy - (32 * (zurgSize - 1))), 32 * zurgSize, 64 * zurgSize);
   animate();
 
@@ -43,19 +47,19 @@ function doStuff() {
 
 function checkSize(y) {
   if (y <= 190) {
-    zurgSize = 1;
-  } else if (y > 190 && y <= 240) {
-    zurgSize = 2;
-  } else if (y > 240 && y <= 290){
-    zurgSize = 3;
-  } else if (y > 290 && y <= 340){
-    zurgSize = 4;
-  } else if (y > 340 && y <= 390){
-    zurgSize = 5;
-  } else if (y > 390 && y <= 440){
-    zurgSize = 6;
+    zurgSize = 1.5;
+  } else if (y > 180 && y <= 230) {
+    zurgSize = 1.7;
+  } else if (y > 230 && y <= 280){
+    zurgSize = 1.9;
+  } else if (y > 280 && y <= 330){
+    zurgSize = 2.1;
+  } else if (y > 330 && y <= 380){
+    zurgSize = 2.3;
+  } else if (y > 380 && y <= 430){
+    zurgSize = 2.5;
    }else {
-    zurgSize = 7;
+    zurgSize = 2.7;
   }
 }
 
@@ -69,7 +73,7 @@ function animate() {
     } else {
       frame1x += 32;
     }
-    if (zurgy < 535)
+    if (zurgy < 475)
       zurgy += 7;
     checkSize(zurgy);
   }
@@ -82,7 +86,7 @@ function animate() {
     } else {
       frame1x += 32;
     }
-    if (zurgx < 770) {
+    if (zurgx < 730) {
       zurgx += 10;
     }
   }
@@ -95,7 +99,7 @@ function animate() {
     } else {
       frame1x += 32;
     }
-    if (zurgy > 130) {
+    if (zurgy > 120) {
       zurgy -= 7;
       checkSize(zurgy);
     }
